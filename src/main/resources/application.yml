@@ -4,11 +4,13 @@ micronaut:
   security:
     authentication: bearer
     token:
+      roles-name: 'authorities'
       jwt:
+        enabled: true
         signatures:
-          secret:
-            generator:
-              secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"'
+          jwks:
+            keycloak:
+              url: "http://localhost:8088/auth/realms/myrealm/protocol/openid-connect/certs"
   server:
     netty:
       compression-threshold: 0
